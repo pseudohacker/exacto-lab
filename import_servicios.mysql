@@ -1,0 +1,13 @@
+SELECT
+	`Access_Precios_pruebas`.`Id` AS `PK_ITEM`,
+	`Access_Precios_pruebas`.`prueba_nombre` AS `I_DESCRIPCION`,
+	`Access_Precios_pruebas`.`prueba_categoria` AS `I_CATEGORIA`,
+	CONCAT(`Access_Precios_pruebas`.`prueba_tiempo`,
+	`Access_Precios_pruebas`.`prueba_tiempo_unidad`) AS `I_TIEMPO_RESULTADO`,
+	NULL AS `I_OBSERVACIONES`,
+	`Access_Precios_pruebas`.`condicion` AS `I_CONDICION`,
+	`Access_Precios_pruebas`.`prueba_disponible` AS `I_DISPONIBLE`,
+	`Access_Precios_pruebas`.`prueba_keyword` AS `I_KEYWORD`,
+	`Access_Precios_pruebas`.`prueba_link` AS `I_LINK`
+FROM
+`Access_Precios_pruebas`

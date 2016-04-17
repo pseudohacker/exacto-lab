@@ -1,0 +1,23 @@
+#Script para importar datos de la lista de servicios
+SELECT
+	`Access_Precios_pruebas`.`Id` AS `FK_ITEM`,
+	'hospital' AS `PP_NOMBRE`,
+	`Access_Precios_pruebas`.`prueba_precio_hosp` AS `PP_PRECIO`
+FROM
+	`Access_Precios_pruebas`
+UNION
+(SELECT
+	`Access_Precios_pruebas`.`Id` AS `FK_ITEM`,
+	'publico' AS `PP_NOMBRE`,
+	`Access_Precios_pruebas`.`prueba_precio_publico` AS `PP_PRECIO`
+FROM
+	`Access_Precios_pruebas`
+UNION
+(SELECT
+	`Access_Precios_pruebas`.`Id` AS `FK_ITEM`,
+	'medico' AS `PP_NOMBRE`,
+	`Access_Precios_pruebas`.`prueba_precio_medico` AS `PP_PRECIO`
+FROM
+	`Access_Precios_pruebas`))
+ORDER BY
+	`FK_ITEM`
