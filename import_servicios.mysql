@@ -1,3 +1,4 @@
+#Script para importar los servicios
 SELECT
 	`Access_Precios_pruebas`.`Id` AS `PK_ITEM`,
 	`Access_Precios_pruebas`.`prueba_nombre` AS `I_DESCRIPCION`,
