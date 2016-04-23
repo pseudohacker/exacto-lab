@@ -21,16 +21,17 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT PK_ITEM, I_DESCRIPCION FROM lista_servicios";
+$sql = "SELECT PK_ITEM, I_DESCRIPCION FROM show_servicios";
 $result = $conn->query($sql);
-
+echo("<table><tr><td>ID</td><td>Nombre</td></tr>");
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["PK_ITEM"]. ", NOMBRE: " . $row["I_DESCRIPCION"]. "<br>";
+        echo "<tr><td>" . $row["PK_ITEM"]. "</td><td>" . $row["I_DESCRIPCION"]. "</td></tr>";
     }
 } else {
     echo "0 results";
 }
+echo("</table");
 $conn->close();
 ?>

@@ -1,0 +1,20 @@
+#Script para insertar lista de precios
+#Requiere import_precios
+
+INSERT INTO
+	precios (
+	FK_ITEM,
+	PP_NOMBRE,
+	PP_PRECIO,
+	PP_CREATED_ON,
+	PP_CREATED_BY
+	)
+SELECT
+	FK_ITEM,
+	PP_NOMBRE,
+	PP_PRECIO,
+	now() AS PP_CREATED_ON,
+	1 AS PP_CREATED_BY
+FROM
+	import_precios
+;
