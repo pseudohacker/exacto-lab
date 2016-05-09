@@ -1,0 +1,11 @@
+SELECT
+	A.PK_ITEM,
+	A.I_DESCRIPCION,
+	A.I_CATEGORIA,
+	B.CAT_DESCRIPCION
+FROM
+	lista_servicios A
+LEFT JOIN
+	servicios_categoria B
+ON
+	(A.I_CATEGORIA = B.PK_CAT)
