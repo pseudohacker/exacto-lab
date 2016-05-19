@@ -8,7 +8,7 @@
 //$html = htmlspecialchars($utf8_string, ENT_COMPAT, 'UTF-8')
 
 $servername = "localhost";
-$username = "";
+$username = "reader";
 $password = "";
 $dbname = "ExactoLab";
 $charset = "utf8";
@@ -21,7 +21,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT PK_ITEM, I_DESCRIPCION FROM show_servicios";
+$sql = "SELECT PK_ITEM, I_DESCRIPCION FROM import_servicios";
 $result = $conn->query($sql);
 echo("<table><tr><td>ID</td><td>Nombre</td></tr>");
 if ($result->num_rows > 0) {
