@@ -1,41 +1,15 @@
 SELECT
-	W.*,
-	Z.PK_PRECIO,
-	Z.PP_PRECIO
-FROM
-
-(SELECT
-	X.`NRO. ITEM`,
-	X.`DESCRIPCION DE ITEM`,
-	X.`CATEGORIA DE ITEM`,
-	X.`TIEMPO DE PROCESAMIENTO`,
-	Y.`TU_DESCRIPCION` AS `UNIDADES DE TIEMPO`
-FROM
-(select
 	A.`PK_ITEM` AS `NRO. ITEM`,
 	A.`I_DESCRIPCION` AS `DESCRIPCION DE ITEM`,
 	B.`CAT_DESCRIPCION` AS `CATEGORIA DE ITEM`,
-	left(A.`I_TIEMPO_RESULTADO`,(char_length(A.`I_TIEMPO_RESULTADO`) - 1)) AS `TIEMPO DE PROCESAMIENTO`,
-	right(A.`I_TIEMPO_RESULTADO`,1) AS `UNIDADES DE TIEMPO`
-from
-		`lista_servicios` A
-	LEFT JOIN
-		`servicios_categoria` B
-	ON
-		(A.`I_CATEGORIA`= B.`PK_CAT`)) X
-LEFT JOIN
-	`tiempo_unidad` Y
-ON
-	(X.`UNIDADES DE TIEMPO` = Y.`PK_TU`)
-) W
-JOIN
-	(SELECT
-	*
-	FROM
-	`precios`
-	WHERE
-	`precios`.`PP_NOMBRE`= 'publico') Z
-ON
-	(W.`NRO. ITEM` = Z.`FK_ITEM`)
-ORDER BY
-	W.`NRO. ITEM`
+	LEFT(A.`I_TIEMPO_RESULTADO`,(char_length(A.`I_TIEMPO_RESULTADO`) - 1)) AS `TIEMPO DE PROCESAMIENTO`,
+	C.`TU_DESCRIPCION`,
+	D.`PK_PRECIO`,
+	D.`PP_PRECIO`
+FROM
+		`lista_servicios` A, `servicios_categoria` B, `tiempo_unidad` C, `precios` D
+WHERE
+		A.`I_CATEGORIA`= B.`PK_CAT` AND
+		RIGHT(A.`I_TIEMPO_RESULTADO`,1) = C.`PK_TU` AND
+		A.`PK_ITEM` = D.`FK_ITEM` AND 
+		D.`PP_NOMBRE`='publico'

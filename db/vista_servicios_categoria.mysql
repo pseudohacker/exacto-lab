@@ -1,3 +1,4 @@
+#junta categoria y nombres
 SELECT
 	A.PK_ITEM,
 	A.I_DESCRIPCION,
