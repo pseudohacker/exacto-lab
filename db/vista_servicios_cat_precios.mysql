@@ -1,0 +1,11 @@
+SELECT
+	A.*,
+	D.`PK_PRECIO`,
+	D.`PP_NOMBRE`,
+	D.`PP_PRECIO` AS PRECIO
+FROM
+		
+		`vista_servicios_categoria` A LEFT JOIN 
+		LEFT JOIN `precios` D ON A.`PK_ITEM` = D.`FK_ITEM`
+-- WHERE
+--		D.`PP_NOMBRE`='javier'

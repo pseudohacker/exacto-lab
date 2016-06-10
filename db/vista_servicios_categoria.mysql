@@ -1,12 +1,38 @@
-#junta categoria y nombres
 SELECT
-	A.PK_ITEM,
-	A.I_DESCRIPCION,
-	A.I_CATEGORIA,
-	B.CAT_DESCRIPCION
+	A.`PK_ITEM` AS `ID`,
+	A.`I_DESCRIPCION` AS `DESCRIPCION`,
+	B.`CAT_DESCRIPCION` AS `CATEGORIA`,
+	CONCAT_WS(' ',LEFT(A.`I_TIEMPO_RESULTADO`,(char_length(A.`I_TIEMPO_RESULTADO`) - 1)), C.`TU_DESCRIPCION`) AS `TIEMPO`
+	D.`PK_PRECIO`,
+	D.`PP_NOMBRE`,
+	D.`PP_PRECIO` AS PRECIO
 FROM
-	lista_servicios A
-LEFT JOIN
-	servicios_categoria B
-ON
-	(A.I_CATEGORIA = B.PK_CAT)
+		
+		`servicios_categoria` B JOIN 
+		(`lista_servicios` A JOIN `tiempo_unidad` C ON RIGHT(A.`I_TIEMPO_RESULTADO`,1) = C.`PK_TU`) ON A.`I_CATEGORIA`= B.`PK_CAT`
+-		LEFT JOIN 
+			(SELECT `FK_ITEM`, `PK_PRECIO`, `PP_NOMBRE`, `PP_PRECIO`
+			FROM
+			`precios` WHERE `PP_NOMBRE`='javier') D ON A.`ID` = D.`FK_ITEM`
+-- WHERE
+--		D.`PP_NOMBRE`='javier'
+
+
+SELECT
+	A.`PK_ITEM` AS `ID`,
+	A.`I_DESCRIPCION` AS `DESCRIPCION`,
+	B.`CAT_DESCRIPCION` AS `CATEGORIA`,
+	CONCAT_WS(' ',LEFT(A.`I_TIEMPO_RESULTADO`,(char_length(A.`I_TIEMPO_RESULTADO`) - 1)), C.`TU_DESCRIPCION`) AS `TIEMPO`,
+	D.`PK_PRECIO`,
+	D.`PP_NOMBRE`,
+	D.`PP_PRECIO` AS PRECIO
+FROM
+		
+		(`servicios_categoria` B JOIN 
+		(`lista_servicios` A JOIN `tiempo_unidad` C ON RIGHT(A.`I_TIEMPO_RESULTADO`,1) = C.`PK_TU`) ON A.`I_CATEGORIA`= B.`PK_CAT`)
+		LEFT JOIN 
+			(SELECT `FK_ITEM`, `PK_PRECIO`, `PP_NOMBRE`, `PP_PRECIO`
+			FROM
+			`precios` WHERE `PP_NOMBRE`='javier') D ON A.`PK_ITEM` = D.`FK_ITEM`
+-- WHERE
+--		D.`PP_NOMBRE`='javier'
